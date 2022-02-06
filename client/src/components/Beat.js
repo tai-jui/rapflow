@@ -32,13 +32,13 @@ const Beat = ({
   };
 
   useEffect(() => {
-    console.log(
-      "Clock is: ",
-      Tone.Transport.seconds,
-      ". Measure i: ",
-      time.measure,
-      res
-    );
+    // console.log(
+    //   "Clock is: ",
+    //   Tone.Transport.seconds,
+    //   ". Measure i: ",
+    //   time.measure,
+    //   res
+    // );
   }, [res]);
 
   useEffect(() => {

@@ -30,16 +30,17 @@ const Verse = ({ res, time }) => {
 
   // One useEffect sorts the res into the array of line objects
   useEffect(() => {
-    console.log(res.words);
-    for (const word of res.words) {
-      for (const line of lines) {
-        if (word.start < line.time) {
-          console.log(word);
-          line.words.push(word);
+    if ("words" in res) {
+      for (const word of res.words) {
+        console.log("word: ", word);
+        for (const line of lines) {
+          if (word.start < line.time) {
+            line.words.push(word);
+          }
         }
       }
     }
-  }, [res, lines]);
+  }, [res]);
 
   const renderedList = lines.map((item) => {
     return <Line line={item} />;
