@@ -32,19 +32,20 @@ const Beat = ({
   };
 
   useEffect(() => {
-    console.log(
-      "Clock is: ",
-      Tone.Transport.seconds,
-      ". Measure i: ",
-      time.measure,
-      res
-    );
+    // console.log(
+    //   "Clock is: ",
+    //   Tone.Transport.seconds,
+    //   ". Measure i: ",
+    //   time.measure,
+    //   res
+    // );
   }, [res]);
 
   useEffect(() => {
     if (loaded && running) {
-      Tone.Transport.seconds = 0;
       if (samplesLoaded) {
+        Tone.start();
+        Tone.Transport.seconds = 0;
         Tone.Transport.start();
       }
     } else {

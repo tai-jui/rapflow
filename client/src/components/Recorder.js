@@ -37,7 +37,6 @@ const Recorder = ({ setMsg, running, setRes, setLoaded }) => {
         );
 
         setLoaded(true);
-
         // handle incoming messages to display transcription to the DOM
         const texts = {};
         socket.current.onmessage = (message) => {
@@ -46,7 +45,6 @@ const Recorder = ({ setMsg, running, setRes, setLoaded }) => {
           texts[res.audio_start] = res.text;
           const keys = Object.keys(texts);
           keys.sort((a, b) => a - b);
-          // console.log(res);
           setRes(res);
           for (const key of keys) {
             if (texts[key]) {

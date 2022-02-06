@@ -1,7 +1,9 @@
 import React from "react";
 
 const Line = ({ line }) => {
-  return <div>3</div>;
+  let lines = [];
+  line.words.forEach((word) => lines.push(word.text));
+  return <div>{lines.join(" ")}</div>;
 };
 
 export default Line;

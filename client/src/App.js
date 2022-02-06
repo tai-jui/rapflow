@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 
 import Recorder from "./components/Recorder";
 import Verse from "./components/Verse";
+import OpenAI from "./components/OpenAI";
 
 import "./App.css";
 import Beat from "./components/Beat";
@@ -16,9 +17,10 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const [time, setTime] = useState({
     second: 0,
-    bpm: 105,
+    bpm: 100,
     measure: 0,
   });
+  const [prompt, setPrompt] = useState("");
 
   const buttonHandler = () => {
     setRunning((current) => !current);
@@ -51,16 +53,22 @@ function App() {
         loaded={loaded}
       />
       <p>{time.measure}</p>
-      <p
+      <button
         onClick={buttonHandler}
         id="button"
         className="real-time-interface__button"
       >
         {running ? "Stop" : "Start"}
-      </p>
+      </button>
       <div id="message" className="real-time-interface__message">
-        <Verse lines={lines} res={res} time={time} />
+        <Verse
+          lines={lines}
+          res={res}
+          time={time}
+          setPrompt={setPrompt}
+        />
       </div>
+      <OpenAI prompt={prompt} />
     </div>
   );
 }
