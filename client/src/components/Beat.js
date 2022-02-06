@@ -20,7 +20,7 @@ const Beat = ({
   const sampler = useRef(null);
   const seq = useRef(null);
 
-  let local_measure = measure;
+  let local_measure = time.measure;
 
   // Update local variable since callback function is not aware of React state
   const updateTime = () => {

@@ -29,6 +29,7 @@ const Verse = ({ res, time, setPrompt, running }) => {
     setLines([
       ...lines,
       {
+        ai: false,
         measure: time.measure,
         time: time.second,
         words: [],
@@ -91,14 +92,20 @@ const Verse = ({ res, time, setPrompt, running }) => {
 
       console.log(lines);
 
-      lines[lines.length - 4].words.forEach((word) =>
-        prompt.push(word.text)
-      );
-      lines[lines.length - 3].words.forEach((word) =>
-        prompt.push(word.text)
-      );
+      // Check that the lines were not AI generated
+      if (
+        !lines[lines.length - 4].ai &&
+        !lines[lines.length - 3].ai
+      ) {
+        lines[lines.length - 4].words.forEach((word) =>
+          prompt.push(word.text)
+        );
+        lines[lines.length - 3].words.forEach((word) =>
+          prompt.push(word.text)
+        );
 
-      setPrompt(prompt.join(" "));
+        setPrompt(prompt.join(" "));
+      }
     }
   }, [time.measure]);
 
@@ -106,7 +113,14 @@ const Verse = ({ res, time, setPrompt, running }) => {
     return <Line line={item} />;
   });
 
-  return <div>{renderedList}</div>;
+  return (
+    <div>
+      <h2 className="text-neutral-900 font-bold text-xl leading-tight">
+        Your verse
+      </h2>
+      {renderedList}
+    </div>
+  );
 };
 
 export default Verse;
