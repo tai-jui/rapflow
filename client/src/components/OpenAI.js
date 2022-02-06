@@ -6,7 +6,7 @@ const OpenAI = ({ prompt }) => {
     "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";
   const [payload, setPayload] = useState({
     prompt: "",
-    maxTokens: 25,
+    maxTokens: 15,
     temperature: 0.7,
     n: 1,
   });
@@ -23,9 +23,9 @@ const OpenAI = ({ prompt }) => {
   };
 
   useEffect(() => {
-    // setPromptText(`Write a 4 line poem: \n\n${prompt}`);
+    setPromptText(`Rhyme the following lines: \n\n"${prompt}`);
     console.log("setting prompt to, ", prompt);
-    // submitHandler();
+    submitHandler();
   }, [prompt]);
 
   return (

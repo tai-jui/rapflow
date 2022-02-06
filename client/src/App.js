@@ -24,6 +24,12 @@ function App() {
 
   const buttonHandler = () => {
     setRunning((current) => !current);
+    if (running) {
+      setTime({
+        ...time,
+        measure: 0,
+      });
+    }
   };
 
   useEffect(() => {
@@ -66,6 +72,7 @@ function App() {
           res={res}
           time={time}
           setPrompt={setPrompt}
+          running={running}
         />
       </div>
       <OpenAI prompt={prompt} />

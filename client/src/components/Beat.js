@@ -49,6 +49,7 @@ const Beat = ({
         Tone.Transport.start();
       }
     } else {
+      local_measure = 0;
       Tone.Transport.stop();
     }
   }, [loaded, running, samplesLoaded]);
@@ -88,14 +89,14 @@ const Beat = ({
       const loop = new Tone.Loop((time) => {
         // use the callback time to schedule events
 
-        synth.triggerAttackRelease("E2", "1m");
-        synth.triggerAttackRelease("E1", "1m", "+2m");
+        synth.triggerAttackRelease("D2", "1m");
+        synth.triggerAttackRelease("D1", "1m", "+2m");
         updateTime();
       }, "1m").start(0);
     });
   }, []);
 
-  return <div>{Tone.Transport.ticks}</div>;
+  return <div></div>;
 };
 
 export default Beat;

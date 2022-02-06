@@ -13,7 +13,7 @@ app.get("/", async (req, res) => {
       { expires_in: 3600 }, // can set a TTL timer in seconds.
       {
         headers: {
-          authorization: "87f3b1bb855345a3a8efe9e58ea5fecc",
+          authorization: "6afc21bb2f684a0bba98536e5f54b9e3",
         },
       }
     ); // AssemblyAI API Key goes here

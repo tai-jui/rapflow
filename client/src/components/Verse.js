@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Line from "./Line";
 
-const Verse = ({ res, time, setPrompt }) => {
+const Verse = ({ res, time, setPrompt, running }) => {
   const [lines, setLines] = useState([]);
   const [finalWords, setFinalWords] = useState([]);
   const [firstRes, setFirstRes] = useState(true);
@@ -16,6 +16,13 @@ const Verse = ({ res, time, setPrompt }) => {
   //       setFirstRes(false);
   //     }
   //   }, [res]);
+
+  useEffect(() => {
+    if (running) {
+      setLines([]);
+      setFinalWords([]);
+    }
+  }, [running]);
 
   // One useEffect creates the array of lines, which updates on changes to measure
   useEffect(() => {
@@ -66,7 +73,6 @@ const Verse = ({ res, time, setPrompt }) => {
       setLines(new_lines);
 
       if (res.message_type === "FinalTranscript") {
-        console.log("setting final words", combined);
         setFinalWords(combined);
       }
 
@@ -79,19 +85,22 @@ const Verse = ({ res, time, setPrompt }) => {
   // Set the prompt for OpenAI
   useEffect(() => {
     // Get the the latest completed two lines
-    let index = Math.floor((lines.length - 1) / 2);
-    console.log("index:", index);
-    if (index > 0) {
+    if (lines.length >= 4 && lines.length % 2 === 0) {
+      console.log(lines.length);
       let prompt = [];
 
-      lines[index].words.forEach((word) => prompt.push(word.text));
-      lines[index + 1].words.forEach((word) =>
+      console.log(lines);
+
+      lines[lines.length - 4].words.forEach((word) =>
+        prompt.push(word.text)
+      );
+      lines[lines.length - 3].words.forEach((word) =>
         prompt.push(word.text)
       );
 
       setPrompt(prompt.join(" "));
     }
-  }, [lines, time.measure]);
+  }, [time.measure]);
 
   const renderedList = lines.map((item) => {
     return <Line line={item} />;
